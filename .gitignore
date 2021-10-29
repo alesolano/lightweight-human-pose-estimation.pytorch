@@ -3,3 +3,14 @@
 
 # Models
 models/*.pth
+
+# Jupyter
+.ipynb_checkpoints
+.ipython
+
+# Caches and history
+__pycache__
+.cache
+.local
+.bash_history
+.python_history
