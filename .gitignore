@@ -16,3 +16,7 @@ __pycache__
 .local
 .bash_history
 .python_history
+
+# Data
+*/*.txt
+*/*.mp4
