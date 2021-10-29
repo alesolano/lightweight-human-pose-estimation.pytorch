@@ -7,6 +7,8 @@ models/*.pth
 # Jupyter
 .ipynb_checkpoints
 .ipython
+.jupyter
+*.ipynb
 
 # Caches and history
 __pycache__
