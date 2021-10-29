@@ -44,6 +44,10 @@ class Pose:
             self.id = Pose.last_id + 1
             Pose.last_id += 1
 
+    @staticmethod
+    def reset_id():
+        Pose.last_id = -1
+
     def draw(self, img):
         assert self.keypoints.shape == (Pose.num_kpts, 2)
 
