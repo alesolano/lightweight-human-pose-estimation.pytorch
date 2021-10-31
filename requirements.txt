@@ -1,14 +1,14 @@
 # Jupyter
-jupyter
-nbconvert
+jupyter==1.0.0
+nbconvert==6.2.0
 prompt-toolkit
 
 # Tools
-matplotlib
+matplotlib==3.4.3
 numpy>=1.14.0
-opencv-python>=3.4.0.14
+opencv-python==4.5.4.58
 pycocotools==2.0.0
 
 # Torch
-torch>=0.4.1
-torchvision>=0.2.1
+torch==1.10.0
+torchvision==0.11.0
