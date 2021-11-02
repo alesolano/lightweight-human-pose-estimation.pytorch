@@ -8,7 +8,7 @@ run = Run()
 
 @app.route('/predict', methods=['GET'])
 def predict():
-    boxes = run.get_bboxes_from_video('./videos/video.mp4')
+    boxes = run.get_bboxes_from_video('/workspace/videos/video.mp4')
     return jsonify(boxes)
 
 
