@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 
 from run import Run
 
@@ -8,7 +8,8 @@ run = Run()
 
 @app.route('/predict', methods=['GET'])
 def predict():
-    boxes = run.get_bboxes_from_video('/workspace/videos/video.mp4')
+    video_name = request.args.get('video_name')
+    boxes = run.get_bboxes_from_video(f'/workspace/videos/{video_name}')
     return jsonify(boxes)
 
 
