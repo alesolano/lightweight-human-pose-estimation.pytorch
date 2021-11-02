@@ -7,12 +7,13 @@ from modules.pose import Pose, track_poses
 from modules.keypoints import extract_keypoints, group_keypoints
 
 class VideoReader(object):
-    def __init__(self, file_name):
+    def __init__(self, file_name, resize=None):
         self.file_name = file_name
         try:  # OpenCV needs int to read from webcam
             self.file_name = int(file_name)
         except ValueError:
             pass
+        self.resize = resize
 
     def __iter__(self):
         self.cap = cv2.VideoCapture(self.file_name)
@@ -24,6 +25,12 @@ class VideoReader(object):
         was_read, img = self.cap.read()
         if not was_read:
             raise StopIteration
+
+        if self.resize:
+            width = int(img.shape[1] * self.resize)
+            height = int(img.shape[0] * self.resize)
+            img = cv2.resize(img, (width, height), interpolation = cv2.INTER_AREA)
+
         return img
 
 
@@ -76,7 +83,7 @@ def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu,
     return heatmaps, pafs, scale, pad
 
 
-def evaluate_video(net, video_path, cpu=True, skip=10, draw=False, track=False, smooth=0, reset_pose=True):
+def evaluate_video(net, video_path, cpu=True, skip=10, resize=None, draw=False, track=False, smooth=0, reset_pose=True):
 
     poses_per_frame = {}
 
@@ -86,7 +93,7 @@ def evaluate_video(net, video_path, cpu=True, skip=10, draw=False, track=False, 
     num_keypoints = Pose.num_kpts
     previous_poses = []
 
-    frame_provider = VideoReader(video_path)
+    frame_provider = VideoReader(video_path, resize=resize)
 
     if reset_pose:
         Pose.reset_id()

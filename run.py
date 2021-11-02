@@ -41,11 +41,11 @@ class Run():
         print('Download complete!')
 
 
-    def get_bboxes_from_video(self, video_path, draw=False):
+    def get_bboxes_from_video(self, video_path, resize=None, draw=False):
 
         bboxes_per_frame = {}
 
-        poses_per_frame, img_shape = evaluate_video(self.net, video_path, self.cpu, draw=draw)
+        poses_per_frame, img_shape = evaluate_video(self.net, video_path, self.cpu, resize=resize, draw=draw)
         
         img_height, img_width = img_shape[:2]
 
